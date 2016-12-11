@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+
+    <title>Iron Altar Produkty</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div class="container">
+
+    <div class="row">
+        <div th:each="product : ${products}"  class="col-md-6 productBox">
+
+            <a th:href="${'/product/' + product.id}"><img class="img-responsive img-thumbnail" width="200" height="200" th:src="${product.imageUrl}+${product.imageName}"/></a>
+            <h2 th:text="${product.brand}">Marka</h2>
+            <h3 th:text="${product.price}">cena</h3>
+            <a th:href="${'/product/' + product.id}" class="btn btn-success btn-lg">Zobacz</a>
+
+
+        </div>
+
+
+</div>
+</div>
+
+
+<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+<!--/*/ <th:block th:include="fragments/js :: js"></th:block> /*/-->
+
+</body>
+</html>

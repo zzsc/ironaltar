@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Insert title here</title>
+</head>
+<body>
+
+<div th:fragment="js">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+<script src="js/gistfile1.js" th:src="@{/js/gistfile1.js}"></script>
+<!-- <script src="js/navbarOnHover.js" th:src="@{/js/navbarOnHover.js}"></script> -->
+<script src="js/preloader.js" th:src="@{/js/preloader.js}"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+<script src="js/touchc.js" th:src="@{/js/touchc.js}"></script>
+<script>window.scrollTo(0, 500);</script>
+</div>
+
+</body>
+</html>

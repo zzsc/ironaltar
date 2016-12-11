@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+
+    <title>Iron Altar Produkty</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+<div class="container">
+    <h2>Szczegóły produktów</h2>
+        <div>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Produkt Id:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${product.id}">Produkt Id</p></div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-sm-2 control-label">Marka produktu:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${product.brand}">Marka produktu</p></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Opis:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${product.description}">opis</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Cena:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${product.price}">Cena</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Zdjęcie Url:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${product.imageUrl}">url....</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">Nazwa zdjęcia:</label>
+                    <div class="col-sm-10">
+                        <p class="form-control-static" th:text="${product.imageName}">url....</p>
+                    </div>
+                </div>
+                
+            </form>
+            
+            <img src="${product.imageUrl}+${product.imageName}" width="200"
+                     th:src="${product.imageUrl}+${product.imageName}"/>
+            
+    </div>
+</div>
+<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+<!--/*/ <th:block th:include="fragments/js :: js"></th:block> /*/-->
+
+</body>
+</html>

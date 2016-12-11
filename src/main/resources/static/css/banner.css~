@@ -1,0 +1,85 @@
+ 
+#container {
+ width: auto;
+ overflow: hidden;
+ background: white;
+}
+/*photobanner*/
+ 
+.photobanner {
+ height: 36vw;
+ width: 98.9vw;
+}
+
+/*keyframe animations*/
+.first {
+	 height: 54vw;
+ width: 98.9vw;
+ -webkit-animation: bannermove 30s linear infinite;
+    -moz-animation: bannermove 30s linear infinite;
+     -ms-animation: bannermove 30s linear infinite;
+      -o-animation: bannermove 30s linear infinite;
+         animation: bannermove 30s linear infinite;
+}
+ 
+@keyframes "bannermove" {
+ 0% {
+    margin-top: 0px;
+ } 
+ 50% {
+    margin-top: -18vw;
+ }
+ 100% {
+    margin-top: 0px;
+ } 
+
+ 
+}
+ 
+@-moz-keyframes bannermove {
+ 0% {
+    margin-top: 0px;
+ } 
+ 50% {
+    margin-top: -18vw;
+ }
+ 100% {
+    margin-top: 0px;
+ }  
+}
+ 
+@-webkit-keyframes "bannermove" {
+ 0% {
+    margin-top: 0px;
+ } 
+ 50% {
+    margin-top: -18vw;
+ }
+ 100% {
+    margin-top: 0px;
+ } 
+}
+ 
+@-ms-keyframes "bannermove" {
+ 0% {
+    margin-top: 0px;
+ } 
+ 50% {
+    margin-top: -18vw;
+ }
+ 100% {
+    margin-top: 0px;
+ } 
+}
+ 
+@-o-keyframes "bannermove" {
+ 0% {
+    margin-top: 0px;
+ } 
+ 50% {
+    margin-top: -18vw;
+ }
+ 100% {
+    margin-top: 0px;
+ }  
+}

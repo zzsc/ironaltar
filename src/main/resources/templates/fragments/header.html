@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+</head>
+<body>
+<div class="container">
+</div>
+<div th:fragment="header">
+    <div class="se-pre-con"></div>
+ <div align="center" class="col-md-12">
+				<div class="row">
+					<div class="naglowek0">
+  						<img th:src="@{/img/logos.png}" alt="" class="logoia"/>
+					</div>			
+				</div>
+	</div>
+    <div align="center" class="col-md-12">
+            <div class="row">
+            <div class="naglowek">
+  						<strong>ELEMENTY ARANŻACJI WNĘTRZ</strong>
+		    </div>
+        </div>
+	</div>
+	<div class="row">
+  		<div class="col-md-12">
+    <div id="container">
+         <div class="photobanner">
+            <img class="first  no-cpu" th:src="@{/img/baner.jpg}" alt="" />
+         </div>
+    </div>
+  	</div>
+	</div>
+
+
+<div class="row">
+<div class="col-md-12">
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+      <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#" style="text-align: left;"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li><a href="about.html">O NAS</a></li>
+        <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">PRODUKTY <span class="caret"></span></a>
+	          		<ul class="dropdown-menu">
+            		<li><a href="#" th:href="@{/products/salon}" class="dropdown-font">SALON</a></li>
+						<li role="separator" class="divider"></li>            		
+            		<li><a href="#" th:href="@{/products/kitchen}" class="dropdown-font">KUCHNIA</a></li>
+						<li role="separator" class="divider"></li>            		
+            		<li><a href="#" th:href="@{/products/bathroom}" class="dropdown-font">ŁAZIENKA</a></li>
+            		<li role="separator" class="divider"></li>
+           			<li><a href="#" th:href="@{/products/garage}" class="dropdown-font">GARAŻ</a></li>
+						<li role="separator" class="divider"></li>
+           			<li><a href="#" th:href="@{/products/garden}" class="dropdown-font">OGRODY</a></li>
+           			<li role="separator" class="divider"></li>
+           			<li><a href="#" th:href="@{/products/balcony}" class="dropdown-font">BALKON</a></li>
+    					</ul>
+         </li>
+			<li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">INDYWIDUALNE PROJEKTY<span class="caret"></span></a>
+          			<ul class="dropdown-menu">
+            		<li><a href="#" class="dropdown-font">TWÓJ POMYSŁ</a></li>
+						<li role="separator" class="divider"></li>            		
+            		<li><a href="#" class="dropdown-font">VIP</a></li>
+						<li role="separator" class="divider"></li>            		
+            		<li><a href="#" class="dropdown-font">CO WYKONYWALIŚMY ?</a></li>
+           		</ul>
+         </li>
+         <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">WSPÓŁPRACA<span class="caret"></span></a>
+         	 		<ul class="dropdown-menu">
+            		<li><a href="#" class="dropdown-font">PROSTY PROJEKT GRAFICZNY</a></li>
+						<li role="separator" class="divider"></li>            		
+            		<li><a href="#" class="dropdown-font">ZAAWANSOWANA GRAFIKA</a></li>
+						<li role="separator" class="divider"></li>            		
+            		<li><a href="#" class="dropdown-font">PRODUCENCI</a></li>
+             		</ul>
+         </li>
+         <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">REALIZACJA ZAMÓWIENIA <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+            <li><a href="#" class="dropdown-font">Action</a></li>
+            <li><a href="#" class="dropdown-font">Another action</a></li>
+            <li><a href="#" class="dropdown-font">Something else here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#" class="dropdown-font">Separated link</a></li>
+            </ul>
+         </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</div>
+</div>
+</div>
+</body>
+</html>
