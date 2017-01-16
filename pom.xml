@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 
 	<name>ironaltar</name>
-	<description>Demo project for Spring Boot</description>
+	<description>IronAltar</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
