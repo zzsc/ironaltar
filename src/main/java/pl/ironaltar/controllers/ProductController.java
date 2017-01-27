@@ -1,12 +1,22 @@
 package pl.ironaltar.controllers;
-import pl.ironaltar.domain.Product;
-import pl.ironaltar.services.ProductService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.ironaltar.domain.Product;
+import pl.ironaltar.services.ProductService;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.UUID;
 
 @Controller
 public class ProductController {
@@ -67,8 +77,33 @@ public class ProductController {
         return "productform";
     }
 
+    String workingDir = System.getProperty("user.dir");
     @RequestMapping(value = "product", method = RequestMethod.POST)
-    public String saveProduct(Product product){
+    public String saveProduct(Product product,@RequestParam("file") MultipartFile file,
+                              RedirectAttributes redirectAttributes){
+
+            if (file.isEmpty()) {
+                redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
+                return "redirect:uploadStatus";
+            }
+
+            try {
+                UUID uniqueKey = UUID.randomUUID();
+                product.setImageName(uniqueKey+".jpg");
+                // Get the file and save it somewhere
+                byte[] bytes = file.getBytes();
+                Path path = Paths.get(workingDir+"/src/main/resources/static/images/" + uniqueKey +".jpg");
+                product.setImageUrl("/images/");
+                product.setProductId(uniqueKey+"");
+                Files.write(path, bytes);
+
+                redirectAttributes.addFlashAttribute("message",
+                        "You successfully uploaded '" + file.getOriginalFilename() + "'");
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         productService.saveProduct(product);
         return "redirect:/productsadmin";
     }

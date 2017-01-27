@@ -46,11 +46,13 @@
                         <p class="form-control-static" th:text="${product.imageName}">url....</p>
                     </div>
                 </div>
-                
+
+                <img src="${product.imageUrl}+${product.imageName}" width="200"
+                     th:src="${product.imageUrl}+${product.imageName}"/>
+
             </form>
             
-            <img src="${product.imageUrl}+${product.imageName}" width="200"
-                     th:src="${product.imageUrl}+${product.imageName}"/>
+
             
     </div>
 </div>
