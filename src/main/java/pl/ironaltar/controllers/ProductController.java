@@ -109,13 +109,16 @@ public class ProductController {
         try {
 
         FTPClient ftpClient = new FTPClient();
+
         ftpClient.connect(server, port);
         ftpClient.login(user, pass);
         ftpClient.enterLocalPassiveMode();
         ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
         String fileNamee = uniqueKey+".jpg";
         File fileName = new File(uniqueKey+".jpg");
         InputStream inp = file.getInputStream();
+
         ftpClient.storeFile(fileNamee,inp);
 
 
