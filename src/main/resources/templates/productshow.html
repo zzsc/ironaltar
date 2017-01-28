@@ -50,6 +50,8 @@
                 <img src="${product.imageUrl}+${product.imageName}" width="200"
                      th:src="${product.imageUrl}+${product.imageName}"/>
 
+                <a th:href="${'/productjson/' + product.id}">Json</a>
+
             </form>
             
 

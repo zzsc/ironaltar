@@ -3,10 +3,7 @@ package pl.ironaltar.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.ironaltar.domain.Product;
@@ -112,6 +109,14 @@ public class ProductController {
     public String delete(@PathVariable Integer id){
         productService.deleteProduct(id);
         return "redirect:/productsadmin";
+    }
+
+    @RequestMapping(
+            value = "/productjson/{id}",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    public @ResponseBody Product getProductById(@PathVariable Integer id) {
+        return productService.getProductById(id);
     }
 
 }

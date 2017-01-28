@@ -1,14 +1,11 @@
 package pl.ironaltar.bootstrap;
 
-import pl.ironaltar.domain.Product;
-import pl.ironaltar.repositories.ProductRepository;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-
-import java.math.BigDecimal;
+import pl.ironaltar.repositories.ProductRepository;
 
 @Component
 public class ProductLoader implements ApplicationListener<ContextRefreshedEvent> {
@@ -26,7 +23,7 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
     public void onApplicationEvent(ContextRefreshedEvent event) {
 /*
         Product shirt = new Product();
-        shirt.setDescription("Spring Framework Guru Shirt");
+        shirt.setDescription("Casorama");
         shirt.setBrand("Casorama");
         shirt.setCategory("balcony");
         shirt.setPrice(new BigDecimal("18.95"));
@@ -38,7 +35,7 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
         log.info("Saved Shirt - id: " + shirt.getId());
 
         Product mug = new Product();
-        mug.setDescription("Spring Framework Guru Mug");
+        mug.setDescription("Casorama");
         mug.setBrand("Liroy Merlin");
         mug.setCategory("balcony");
         mug.setImageUrl("http://classicmeble.pl/wp-content/uploads/2015/02/");
@@ -50,7 +47,7 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
         log.info("Saved Mug - id:" + mug.getId());
 
         Product bug = new Product();
-        bug.setDescription("Spring Framework Guru Mug");
+        bug.setDescription("Casorama");
         bug.setBrand("Agata meble");
         bug.setCategory("balcony");
         bug.setImageUrl("http://classicmeble.pl/wp-content/uploads/2015/02/");
@@ -62,7 +59,7 @@ public class ProductLoader implements ApplicationListener<ContextRefreshedEvent>
         log.info("Saved Bug - id:" + bug.getId());
 
         Product shoe = new Product();
-        shoe.setDescription("Spring Framework Guru Mug");
+        shoe.setDescription("Casorama");
         shoe.setBrand("Ikea");
         shoe.setCategory("balcony");
         shoe.setImageUrl("http://classicmeble.pl/wp-content/uploads/2015/02/");
