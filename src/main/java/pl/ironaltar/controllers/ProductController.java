@@ -11,7 +11,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.ironaltar.domain.Product;
 import pl.ironaltar.services.ProductService;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.UUID;
@@ -75,7 +74,6 @@ public class ProductController {
         return "productform";
     }
 
-    String workingDir = System.getProperty("user.dir");
     @RequestMapping(value = "product", method = RequestMethod.POST)
     public String saveProduct(Product product,@RequestParam("file") MultipartFile file,
                               RedirectAttributes redirectAttributes) throws IOException {
@@ -84,53 +82,26 @@ public class ProductController {
                 redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
                 return "redirect:productform";
             }
-/*
-           try {
-                UUID uniqueKey = UUID.randomUUID();
-                byte[] bytes = file.getBytes();
-                Path path = Paths.get(workingDir+"/src/main/resources/static/images/" + uniqueKey +".jpg");
-                product.setImageName(uniqueKey+".jpg");
-                product.setImageUrl("/images/");
-                product.setProductId(uniqueKey+"");
-                Files.write(path, bytes);
 
+            UUID uniqueKey = UUID.randomUUID();
+            try {
+                FTPClient ftpClient = new FTPClient();
+                ftpClient.connect("ftp.etronik.pl", 21);
+                ftpClient.login("szzc@etronik.pl", "jMo3X92YegbQ");
+                ftpClient.enterLocalPassiveMode();
+                ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+                String fileName = uniqueKey+".jpg";
+                InputStream inp = file.getInputStream();
+                ftpClient.storeFile(fileName,inp);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-        */
-
-        String server = "ftp.etronik.pl";
-        int port = 21;
-        String user = "szzc@etronik.pl";
-        String pass = "jMo3X92YegbQ";
-        UUID uniqueKey = UUID.randomUUID();
-
-        try {
-
-        FTPClient ftpClient = new FTPClient();
-
-        ftpClient.connect(server, port);
-        ftpClient.login(user, pass);
-        ftpClient.enterLocalPassiveMode();
-        ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-
-        String fileNamee = uniqueKey+".jpg";
-        File fileName = new File(uniqueKey+".jpg");
-        InputStream inp = file.getInputStream();
-
-        ftpClient.storeFile(fileNamee,inp);
-
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-        product.setImageName(uniqueKey+".jpg");
-        product.setImageUrl("http://etronik.pl/szczepanczyk/");
-        product.setProductId(uniqueKey+"");
-        productService.saveProduct(product);
+            product.setImageName(uniqueKey+".jpg");
+            product.setImageUrl("http://etronik.pl/szczepanczyk/");
+            product.setProductId(uniqueKey+"");
+            productService.saveProduct(product);
         return "redirect:/productsadmin";
     }
 

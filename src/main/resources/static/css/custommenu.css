@@ -169,5 +169,8 @@ font-size: 1.5vw;
 .productBox{
     text-align: center;
     background-color: silver;
-    border: groove;
+    padding: 10px;
+    border-style: solid;
+    border-color: white;
+    border-width: 15px;
 }

@@ -25,8 +25,9 @@
                 </tr>
                    <tr th:each="product : ${products}">
                     <td th:text="${product.id}"><a href="/product/${product.id}">Id</a></td>
-                    <td th:text="${product.productId}">Produkt Id</td><td th:text="${product.description}">Opis</td>
+                    <td th:text="${product.productId}">Produkt Id</td>
                     <td th:text="${product.brand}">Marka</td>
+                    <td th:text="${product.description}">Opis</td>
                     <td th:text="${product.price}">cena</td>
                     <td><a th:href="${'/product/' + product.id}">Zobacz</a></td>
                     <td><a th:href="${'/productsadmin/edit/' + product.id}">Edytuj</a></td>
