@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> findByCategory(String category) {return productRepository.findByCategory(category);
+    public List<Product> findByCategoryOrderByBrandAsc(String category) {return productRepository.findByCategoryOrderByBrandAsc(category);
     }
 
 }

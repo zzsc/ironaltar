@@ -8,7 +8,7 @@ import java.util.List;
 public interface ProductService {
     Iterable<Product> listAllProducts();
 
-    List<Product> findByCategory(String category);
+    List<Product> findByCategoryOrderByBrandAsc(String category);
 
     Product getProductById(Integer id);
 

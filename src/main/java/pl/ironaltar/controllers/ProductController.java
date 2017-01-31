@@ -34,7 +34,7 @@ public class ProductController {
 
     @RequestMapping(value = "/products/{category}", method = RequestMethod.GET)
     public String list(@PathVariable String category, Model model){
-        model.addAttribute("products", productService.findByCategory(category));
+        model.addAttribute("products", productService.findByCategoryOrderByBrandAsc(category));
         return "products";
     }
 
