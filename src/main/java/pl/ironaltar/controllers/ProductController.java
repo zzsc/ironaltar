@@ -13,6 +13,7 @@ import pl.ironaltar.services.ProductService;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Controller
@@ -25,7 +26,6 @@ public class ProductController {
         this.productService = productService;
     }
 
-    /*bez logowania*/
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String list(Model model){
         model.addAttribute("products", productService.listAllProducts());
@@ -38,37 +38,44 @@ public class ProductController {
         return "products";
     }
 
+    @RequestMapping(value = "/products/below/{price}", method = RequestMethod.GET)
+    public String list(@PathVariable BigDecimal price, Model model){
+        model.addAttribute("products", productService.findByPriceLessThanOrderByPriceAsc(price));
+        return "products";
+    }
+
+
     @RequestMapping("product/{id}")
     public String showProduct(@PathVariable Integer id, Model model){
         model.addAttribute("product", productService.getProductById(id));
         return "productshow";
     }
-    /*logowanie*/
 
-    @RequestMapping("/login")
-    public String login(){
-        return "login";
+    // JSON
+    @RequestMapping(
+            value = "/productjson/{id}",
+            produces = { "application/json" },
+            method = RequestMethod.GET)
+    public @ResponseBody Product getProductById(@PathVariable Integer id) {
+        return productService.getProductById(id);
     }
 
-    @RequestMapping("/logout")
-    public String logout(){
-        return "login";
-    }
 
-    /*po logowaniu logowania*/
-    @RequestMapping(value = "/productsadmin", method = RequestMethod.GET)
+    //Administracja produktami po logowaniu role Admin
+
+    @RequestMapping(value = "/admin/products", method = RequestMethod.GET)
     public String listAdmin(Model model){
         model.addAttribute("products", productService.listAllProducts());
         return "productsadmin";
     }
 
-    @RequestMapping("productsadmin/edit/{id}")
+    @RequestMapping("admin/products/edit/{id}")
     public String edit(@PathVariable Integer id, Model model){
         model.addAttribute("product", productService.getProductById(id));
         return "productform";
     }
 
-    @RequestMapping("productsadmin/new")
+    @RequestMapping("admin/products/new")
     public String newProduct(Model model){
         model.addAttribute("product", new Product());
         return "productform";
@@ -102,21 +109,15 @@ public class ProductController {
             product.setImageUrl("http://etronik.pl/szczepanczyk/");
             product.setProductId(uniqueKey+"");
             productService.saveProduct(product);
-        return "redirect:/productsadmin";
+        return "redirect:/admin/products";
     }
 
-    @RequestMapping("productsadmin/delete/{id}")
+    @RequestMapping("admin/products/delete/{id}")
     public String delete(@PathVariable Integer id){
         productService.deleteProduct(id);
         return "redirect:/productsadmin";
     }
 
-    @RequestMapping(
-            value = "/productjson/{id}",
-            produces = { "application/json" },
-            method = RequestMethod.GET)
-    public @ResponseBody Product getProductById(@PathVariable Integer id) {
-        return productService.getProductById(id);
-    }
+
 
 }

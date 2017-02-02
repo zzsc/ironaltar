@@ -4,13 +4,13 @@ package pl.ironaltar.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import pl.ironaltar.services.UserService;
-import pl.ironaltar.services.UserServiceImpl;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SuppressWarnings("deprecation")
 @Configuration
-public class WebConfiguration {
+public class WebConfiguration extends WebMvcConfigurerAdapter {
 
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         configurer.favorPathExtension(true).
@@ -22,10 +22,10 @@ public class WebConfiguration {
     }
 
     @Bean
-    public UserService userService() {
-        return new UserServiceImpl();
+    public BCryptPasswordEncoder passwordEncoder() {
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
     }
-
 
 
 }

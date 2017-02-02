@@ -30,14 +30,14 @@
                     <td th:text="${product.description}">Opis</td>
                     <td th:text="${product.price}">cena</td>
                     <td><a th:href="${'/product/' + product.id}">Zobacz</a></td>
-                    <td><a th:href="${'/productsadmin/edit/' + product.id}">Edytuj</a></td>
-                    <td><a th:href="${'/productsadmin/delete/' + product.id}">Skasuj</a></td>
+                    <td><a th:href="${'/admin/products/edit/' + product.id}">Edytuj</a></td>
+                    <td><a th:href="${'/admin/products/delete/' + product.id}">Skasuj</a></td>
             </tr>
             </table>
     </div>
 </div>
 <div class="row">
-    <a href="/productsadmin/new">Dodaj nowy produkt</a>
+    <a href="/admin/products/new">Dodaj nowy produkt</a>
 </div>
 <div class="row">
     <a href="/logout">Wyloguj</a>

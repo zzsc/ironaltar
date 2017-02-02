@@ -9,10 +9,11 @@
 <body>
 <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 <div class="container">
+    <!--/*/ <th:block th:include="fragments/hibsearch :: hibsearch"></th:block> /*/-->
     <div class="row">
         <div th:each="product : ${products}"  class="col-md-6 productBox">
 
-            <a th:href="${'/product/' + product.id}"><img class="img-responsive img-thumbnail" width="200" height="200" th:src="${product.imageUrl}+${product.imageName}"/></a>
+            <a th:href="${'/product/' + product.id}"><img class="img-responsive img-thumbnail" width="400" height="400" th:src="${product.imageUrl}+${product.imageName}"/></a>
             <h2 th:text="${product.brand}">Marka</h2>
             <h3 th:text="${product.price}">cena</h3>
             <a th:href="${'/product/' + product.id}" class="btn btn-success btn-lg">Zobacz</a>

@@ -5,6 +5,7 @@ import pl.ironaltar.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -35,9 +36,11 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(Integer id) {
         productRepository.delete(id);
     }
-
     @Override
     public List<Product> findByCategoryOrderByBrandAsc(String category) {return productRepository.findByCategoryOrderByBrandAsc(category);
+    }
+    @Override
+    public List<Product> findByPriceLessThanOrderByPriceAsc(BigDecimal price) {return productRepository.findByPriceLessThanOrderByPriceAsc(price);
     }
 
 }

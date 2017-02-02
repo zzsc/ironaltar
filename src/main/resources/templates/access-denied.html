@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+
+    <title>Iron Altar Urzytkownicy</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+<!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+<div class="container">
+    <form th:action="@{/login}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Login</button>
+    </form>
+
+    <div class="panel-group" style="margin-top:40px">
+        <div class="panel panel-primary">
+            Access Denied
+        </div>
+    </div>
+
+</div>
+
+
+
+
+<!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
+<!--/*/ <th:block th:include="fragments/js :: js"></th:block> /*/-->
+
+</body>
+</html>
