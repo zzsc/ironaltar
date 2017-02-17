@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head lang="en">
 </head>
 <body>
@@ -93,7 +93,10 @@
             <li><a href="#" class="dropdown-font">Another action</a></li>
             <li><a href="#" class="dropdown-font">Something else here</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#" class="dropdown-font">Separated link</a></li>
+
+                <li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" href="#" class="dropdown-font">Zaloguj</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" href="#" class="dropdown-font">Wyloguj</a></li>
+
             </ul>
          </li>
       </ul>

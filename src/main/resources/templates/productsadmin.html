@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head lang="en">
 
     <title>Iron Altar Produkty</title>
@@ -35,13 +35,24 @@
             </tr>
             </table>
     </div>
+
+
+
+
+
+    <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/admin/products/new}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="products"
+                type="Submit">Dodaj produkt</button>
+    </form>
+    <br>
+    <form th:action="@{/logout}" method="get">
+        <button class="btn btn-md btn-danger btn-block" name="registration"
+                type="Submit">Wyloguj</button>
+    </form>
+
+
 </div>
-<div class="row">
-    <a href="/admin/products/new">Dodaj nowy produkt</a>
-</div>
-<div class="row">
-    <a href="/logout">Wyloguj</a>
-</div>
+
 <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->
 <!--/*/ <th:block th:include="fragments/js :: js"></th:block> /*/-->
 </body>

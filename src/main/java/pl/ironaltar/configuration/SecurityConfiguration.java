@@ -49,15 +49,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.
                 authorizeRequests()
                 .antMatchers("/","/product/**","/productjson/**","/products/**","/webjars/**","/css/**","/fonts/**",
-                        "/images/**","/img/**","/js/**","/users/**").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/registration").permitAll()
+                        "/images/**","/img/**","/js/**","/users/**","/login","/registration","/index").permitAll()
+
                 .antMatchers("/admin/**").hasAuthority("ADMIN").anyRequest()
                 .authenticated().and().csrf().disable().formLogin()
                 .loginPage("/login").failureUrl("/login?error=true")
                 .defaultSuccessUrl("/userpage")
                 .usernameParameter("email")
                 .passwordParameter("password")
+
                 .and().logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/login").and().exceptionHandling()
@@ -68,9 +68,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-     //  auth
-       //        .inMemoryAuthentication()
-         //      .withUser("maciek").password("haslo").roles("USER");
 
         auth.
                 jdbcAuthentication()

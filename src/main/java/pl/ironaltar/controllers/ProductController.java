@@ -51,15 +51,14 @@ public class ProductController {
         return "productshow";
     }
 
-    // JSON
+    // JSON/XML
     @RequestMapping(
             value = "/productjson/{id}",
-            produces = { "application/json" },
+            produces = { "application/json","application/xml" },
             method = RequestMethod.GET)
     public @ResponseBody Product getProductById(@PathVariable Integer id) {
         return productService.getProductById(id);
     }
-
 
     //Administracja produktami po logowaniu role Admin
 

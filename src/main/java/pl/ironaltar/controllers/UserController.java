@@ -1,7 +1,9 @@
 package pl.ironaltar.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,7 @@ import pl.ironaltar.repositories.RoleRepository;
 import pl.ironaltar.services.UserService;
 
 import javax.validation.Valid;
+import java.util.Collection;
 
 /**
  * Created by szzc on 30.01.17.
@@ -25,6 +28,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private RoleRepository roleRepository;
+    @Value("${spring.queries.roles-query}")
+    private String rolesQuery;
 
     @RequestMapping(value={"/login"}, method = RequestMethod.GET)
     public ModelAndView login(){
@@ -61,6 +66,7 @@ public class UserController {
 
         }
         return modelAndView;
+
     }
 
     @RequestMapping(value="/userpage", method = RequestMethod.GET)
@@ -69,8 +75,13 @@ public class UserController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
 
-        modelAndView.addObject("userName","Witaj " + user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
-      //  modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+        Collection<? extends GrantedAuthority> role = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        String roleString = role.toString();
+        if (roleString.equals("[ADMIN]")) {
+            modelAndView.addObject("adminMessage","Część widoczna tylko dla użytkownika Admin");
+        }
+
+        modelAndView.addObject("userName","Witaj "+roleString+" "+user.getName() + " " + user.getLastName() + " (" + user.getEmail() + ")");
         modelAndView.setViewName("userpage");
         return modelAndView;
     }

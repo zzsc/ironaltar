@@ -15,10 +15,11 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         configurer.favorPathExtension(true).
                 favorParameter(true).
-                parameterName("mediaType").
                 ignoreAcceptHeader(true).
                 useJaf(false).
-                defaultContentType(MediaType.APPLICATION_JSON);
+                defaultContentType(MediaType.APPLICATION_JSON).
+                mediaType("xml", MediaType.APPLICATION_XML);
+
     }
 
     @Bean
@@ -26,6 +27,5 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         return bCryptPasswordEncoder;
     }
-
 
 }

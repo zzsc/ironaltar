@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" >
 <head lang="en">
 
     <title>Iron Altar Urzytkownicy</title>
@@ -10,10 +10,6 @@
 <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
 
 <div class="container">
-    <form th:action="@{/logout}" method="get">
-        <button class="btn btn-md btn-danger btn-block" name="registration"
-                type="Submit">Logout</button>
-    </form>
 
     <div class="panel-group" style="margin-top:40px">
         <div class="panel panel-primary">
@@ -23,14 +19,24 @@
             <div class="panel-body">
 
             </div>
-           <!-- <p class="admin-message-text text-center" th:utext="${adminMessage}"></p> -->
+           <p class="admin-message-text text-center" th:utext="${adminMessage}"></p>
         </div>
     </div>
 
-    <form th:action="@{/admin/products}" method="get">
-        <button class="btn btn-md btn-danger btn-block" name="products"
-                type="Submit">Administrator</button>
-    </form>
+
+    <div>
+
+        <form th:action="@{/logout}" method="get">
+            <button class="btn btn-md btn-danger btn-block" name="registration"
+                    type="Submit">Wyloguj</button>
+        </form>
+        <br>
+        <form sec:authorize="hasAuthority('ADMIN')" th:action="@{/admin/products}" method="get">
+            <button class="btn btn-md btn-danger btn-block" name="products"
+                    type="Submit">Produkty administracja</button>
+        </form>
+
+    </div>
 
 </div>
 
