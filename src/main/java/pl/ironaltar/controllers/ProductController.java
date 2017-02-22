@@ -3,14 +3,17 @@ package pl.ironaltar.controllers;
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.ironaltar.domain.Product;
+import pl.ironaltar.domain.ProductGallery;
+import pl.ironaltar.services.ProductGalleryService;
 import pl.ironaltar.services.ProductService;
 
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -20,6 +23,14 @@ import java.util.UUID;
 public class ProductController {
 
     private ProductService productService;
+    private ProductGalleryService productGalleryService;
+    private DataSource dataSource;
+    private JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Autowired
     public void setProductService(ProductService productService) {
@@ -81,15 +92,12 @@ public class ProductController {
     }
 
     @RequestMapping(value = "product", method = RequestMethod.POST)
-    public String saveProduct(Product product,@RequestParam("file") MultipartFile file,
-                              RedirectAttributes redirectAttributes) throws IOException {
+    public String saveProduct(Product product, ProductGallery productGallery, @RequestParam("files") MultipartFile[] files
+                             ) throws IOException {
 
-            if (file.isEmpty()) {
-                redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
-                return "redirect:productform";
-            }
-
-            UUID uniqueKey = UUID.randomUUID();
+        UUID uniqueKeyProductId = UUID.randomUUID();
+        for(MultipartFile file : files) {
+            UUID uniqueKeyFileName = UUID.randomUUID();
             try {
                 FTPClient ftpClient = new FTPClient();
                 ftpClient.connect("ftp.etronik.pl", 21);
@@ -97,24 +105,40 @@ public class ProductController {
                 ftpClient.enterLocalPassiveMode();
                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
-                String fileName = uniqueKey+".jpg";
+                String fileName = uniqueKeyFileName + ".jpg";
                 InputStream inp = file.getInputStream();
-                ftpClient.storeFile(fileName,inp);
+                ftpClient.storeFile(fileName, inp);
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            product.setImageName(uniqueKey+".jpg");
-            product.setImageUrl("http://etronik.pl/szczepanczyk/");
-            product.setProductId(uniqueKey+"");
-            productService.saveProduct(product);
+            if(product.getImageName() == null && product.getImageUrl() == null) {
+                product.setImageName(uniqueKeyFileName + ".jpg");
+                product.setImageUrl("http://etronik.pl/szczepanczyk/");
+            }
+
+            productGallery.setProductId(uniqueKeyProductId+"");
+            productGallery.setImageName(uniqueKeyFileName + ".jpg");
+            productGallery.setImageUrl("http://etronik.pl/szczepanczyk/");
+
+            String sql = "INSERT INTO productgallery" +
+                    "(productid, imagename, imageurl) VALUES (?, ?, ?)";
+
+            jdbcTemplate = new JdbcTemplate(dataSource);
+
+            jdbcTemplate.update(sql, new Object[] { productGallery.getProductId(),
+                    productGallery.getImageName(),productGallery.getImageUrl()
+            });
+        }
+        product.setProductId(uniqueKeyProductId+"");
+        productService.saveProduct(product);
         return "redirect:/admin/products";
     }
 
     @RequestMapping("admin/products/delete/{id}")
     public String delete(@PathVariable Integer id){
         productService.deleteProduct(id);
-        return "redirect:/productsadmin";
+        return "redirect:/admin/products";
     }
 
 

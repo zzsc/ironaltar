@@ -1,6 +1,8 @@
 package pl.ironaltar.domain;
 
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -12,10 +14,13 @@ public class Product {
 
     @Version
     private Integer version;
+
+    @NotEmpty(message = "*Proszę podać markę")
     private String brand;
     private String category;
     private String imageName;
     private String productId;
+    @NotEmpty(message = "*Proszę wpisać opis")
     private String description;
     private String imageUrl;
     private BigDecimal price;
