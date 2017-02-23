@@ -50,7 +50,15 @@
                 <a th:href="${'/products/'}">Wróć do listy produktów</a><br>
             </div>
 
-            
+            <div class="col-md-4" th:each="image : ${productgallery}">
+                <div th:if="${image.productId == product.productId}">
+                <img class="img-responsive" src="${image.imageUrl}+${image.imageName}"
+                     th:src="${image.imageUrl}+${image.imageName}"/>
+                </div>
+                </div>
+
+
+
     </div>
 </div>
 <!--/*/ <th:block th:include="fragments/footer :: footer"></th:block> /*/-->

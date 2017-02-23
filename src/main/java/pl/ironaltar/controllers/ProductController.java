@@ -37,6 +37,12 @@ public class ProductController {
         this.productService = productService;
     }
 
+    @Autowired
+    public void setProductGalleryService(ProductGalleryService productGalleryService) {
+        this.productGalleryService = productGalleryService;
+    }
+
+
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     public String list(Model model){
         model.addAttribute("products", productService.listAllProducts());
@@ -59,6 +65,7 @@ public class ProductController {
     @RequestMapping("product/{id}")
     public String showProduct(@PathVariable Integer id, Model model){
         model.addAttribute("product", productService.getProductById(id));
+        model.addAttribute("productgallery", productGalleryService.listAllProductGallerys());
         return "productshow";
     }
 
@@ -121,7 +128,7 @@ public class ProductController {
             productGallery.setImageName(uniqueKeyFileName + ".jpg");
             productGallery.setImageUrl("http://etronik.pl/szczepanczyk/");
 
-            String sql = "INSERT INTO productgallery" +
+            String sql = "INSERT INTO product_gallery" +
                     "(productid, imagename, imageurl) VALUES (?, ?, ?)";
 
             jdbcTemplate = new JdbcTemplate(dataSource);
@@ -136,7 +143,7 @@ public class ProductController {
     }
 
     @RequestMapping("admin/products/delete/{id}")
-    public String delete(@PathVariable Integer id){
+    public String delete(@PathVariable Integer id, Product product){
         productService.deleteProduct(id);
         return "redirect:/admin/products";
     }

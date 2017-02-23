@@ -8,4 +8,5 @@ import pl.ironaltar.domain.ProductGallery;
 public interface ProductGalleryService {
     Iterable<ProductGallery> listAllProductGallerys();
     ProductGallery saveProductGallery(ProductGallery productGallery);
+    void deleteProductGallery(Integer id);
 }

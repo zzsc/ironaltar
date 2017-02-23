@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by szzc on 22.02.17.
  */
 @Entity
-@Table(name = "productgallery")
+@Table(name = "product_gallery")
 public class ProductGallery {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

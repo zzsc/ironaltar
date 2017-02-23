@@ -25,4 +25,10 @@ public class ProductGalleryServiceImpl implements ProductGalleryService{
     public ProductGallery saveProductGallery(ProductGallery productGallery) {
         return productGalleryRepository.save(productGallery);
     }
+
+    @Override
+    public void deleteProductGallery(Integer id) {
+        productGalleryRepository.delete(id);
+    }
+
 }
