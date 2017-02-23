@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -144,6 +145,33 @@ public class ProductController {
 
     @RequestMapping("admin/products/delete/{id}")
     public String delete(@PathVariable Integer id, Product product){
+
+        String prId = productService.getProductById(id).getProductId();
+
+        String selectsql = "SELECT imagename FROM product_gallery WHERE productid='"+prId+"'";
+        jdbcTemplate = new JdbcTemplate(dataSource);
+        List<String> filename = (List<String>) jdbcTemplate.queryForList(selectsql,String.class);
+
+        for (int i = 0; i < filename.size(); i++){
+
+        try {
+            FTPClient ftpClient = new FTPClient();
+            ftpClient.connect("ftp.etronik.pl", 21);
+            ftpClient.login("szzc@etronik.pl", "jMo3X92YegbQ");
+            ftpClient.enterLocalPassiveMode();
+            ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+
+            ftpClient.deleteFile(filename.get(i));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        }
+
+
+        String deletesql = "DELETE FROM product_gallery WHERE productid=?";
+        jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate.update(deletesql,prId);
+
         productService.deleteProduct(id);
         return "redirect:/admin/products";
     }
