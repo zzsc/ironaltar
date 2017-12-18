@@ -108,8 +108,8 @@ public class ProductController {
             UUID uniqueKeyFileName = UUID.randomUUID();
             try {
                 FTPClient ftpClient = new FTPClient();
-                ftpClient.connect("ftp.etronik.pl", 21);
-                ftpClient.login("szzc@etronik.pl", "jMo3X92YegbQ");
+                ftpClient.connect("ftp.***********.pl", 21);
+                ftpClient.login("***********", "***********");
                 ftpClient.enterLocalPassiveMode();
                 ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
@@ -122,12 +122,12 @@ public class ProductController {
 
             if(product.getImageName() == null && product.getImageUrl() == null) {
                 product.setImageName(uniqueKeyFileName + ".jpg");
-                product.setImageUrl("http://etronik.pl/szczepanczyk/");
+                product.setImageUrl("http://***********");
             }
 
             productGallery.setProductId(uniqueKeyProductId+"");
             productGallery.setImageName(uniqueKeyFileName + ".jpg");
-            productGallery.setImageUrl("http://etronik.pl/szczepanczyk/");
+            productGallery.setImageUrl("http://***********/");
 
             String sql = "INSERT INTO product_gallery" +
                     "(productid, imagename, imageurl) VALUES (?, ?, ?)";
